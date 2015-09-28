@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Checklist</title>
+        <title>Checklist Setup</title>
 
         <!-- Standard Styles -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -22,12 +22,48 @@
             color: #4caf50;
          }
 
-         .saving {
-            color: #ddd;
+         input.saving {
+            color: #444;
+         }
+
+         .checkbox-material.saving .check {
+            color: #ddd !important;
+         }
+
+         .checkbox-material.saving .check:before {
+            color: #ddd !important;
+            animation: none !important;
+            -webkit-animation: none !important;
+            box-shadow: none !important;
          }
 
          .item-text {
             padding-left: 1em;
+         }
+         .done-text {
+            padding-left: 0.5em;
+         }
+
+         .deleting {
+            color: #ddd;
+         }
+
+         .btn-remove {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            float: right;
+            margin: 2px 0 0 2px;
+         }
+
+         .btn-add {
+            font-size: 24px;
+            line-height: 16px;
+            padding-bottom: 12px;
+         }
+
+         .add-text {
+            font-size: 12px;
          }
         </style>
     </head>
@@ -35,12 +71,12 @@
         <div style="text-align: center;">
             <div class="content" id="content">       
             </div>
-
-            <div class="progress">
-                <div class="progress-bar progress-bar-success" style="width: 0%"></div>
-            </div>
             <br>
-            <div class="completed" style="display: none;"></div>
+            <button class="btn btn-success btn-flat btn-add">+ <span class="add-text">Add</span></button>
+            <br>
+            <hr>
+            Text to display when all items are completed:<br>
+            <input type="text" class="done-text" placeholder="All Done!"></div>
         </div>
 
         <script src="/openlearning.js"></script>
@@ -48,6 +84,6 @@
         <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
         <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-        <script src="display.js"></script>
+        <script src="setup.js"></script>
     </body>
 </html>
