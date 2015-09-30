@@ -3,6 +3,7 @@ var update, save, removeHandler, makeChangeHandler, addHandler;
 var newItem;
 var checklist;
 
+// create a universally unique id
 uuid = function() {
     var _uuid = function(ph) {
         if (ph) {
@@ -24,6 +25,7 @@ uuid = function() {
     return _uuid();
 };
 
+// build the checklist UI
 update = function() {
     $content.empty();
     $.each(checklist, function(i, item) {
@@ -56,7 +58,7 @@ update = function() {
 
         $remove.on('click', removeHandler);
 
-        $input.on('keydown change', makeChangeHandler());
+        $input.on('keyup change', makeChangeHandler());
 
         $content.append($item);
     });
@@ -69,15 +71,51 @@ update = function() {
     }
 };
 
+// saves the checklist and comparison criteria
 save = function(callback) {
+    var callbacksDone = 0;
+    var done = function() {
+        if (callbacksDone === 2) {
+            callback && callback();
+        }
+    };
+    var getCriteria = function(item) {
+        return [item.id, true];
+    };
+
+    // save the checklist
     OL.setup.replace({
         'checklist': checklist
     }, function(result) {
         checklist = result.data.checklist;
+        callbacksDone++;
+        done();
+    });
+
+    // save the criteria for completion
+    /* an object of:
+        {
+            'item-id-1': true,
+            'item-id-2': true
+        }
+       for each item
+    */
+    OL.setCriteria(_.zipObject(_.map(checklist, getCriteria)), function() {
+        callbacksDone++;
+        done();
+    });
+};
+
+// saves the done message (only)
+saveDoneMessage = function(message, callback) {
+    OL.setup.replace({
+        'doneMessage': message
+    }, function(result) {
         callback && callback();
     });
 };
 
+// create a change handler that's debounced, for editing items
 makeChangeHandler = function() {
     var changeHandler = function() {
         var $input = $(this);
@@ -88,16 +126,21 @@ makeChangeHandler = function() {
         });
     };
 
-    var debouncedChangeHandler = _.debounce(changeHandler, 500);
+    var debouncedChangeHandler = _.debounce(changeHandler, 600);
 
     return function() {
-        $(this).addClass('saving').prev('.checkbox-material').addClass('saving');
-        debouncedChangeHandler.call(this);
+        var $input = $(this);
+
+        if ($input.data('lastVal') !== $input.val()) {
+            $input.data('lastVal', $input.val());
+            $input.addClass('saving').prev('.checkbox-material').addClass('saving');
+            debouncedChangeHandler.call(this);
+        }
     };
 };
 
+// remove an item from the list
 removeHandler = function() {
-    alert('remove');
     var updates = {};
     var $btn = $(this);
     var $item = $btn.data('parent');
@@ -112,12 +155,13 @@ removeHandler = function() {
     });
 };
 
+// create a new item
 newItem = function() {
     return {'id': uuid(), 'text': "I've completed this!"};
 };
 
+// handler for adding new items to the list
 addHandler = function() {
-    alert('add');
     checklist.push(newItem());
     $('input.item-text').prop('disabled', true);
     save(function() {
@@ -125,10 +169,38 @@ addHandler = function() {
     });
 };
 
+// when the OL API is ready
 OL(function() {
-    checklist = OL.setup.data.checklist || [newItem()];    
+    // load the checklist from setup data, or just create a new item if there is none
+    checklist = OL.setup.data.checklist || [newItem()];
+
+    // redraw the list
     update();
+
+    // add a click handler to the "+ add" button
     $('button.btn-add').on('click', addHandler);
 
-    OL.on('save', save);
+    // add a debounced change handler to the "done" message text input
+    var debouncedSave = _.debounce(function($input) {
+        saveDoneMessage($input.val(), function() {
+            $input.removeClass('saving'); // it's saved, remove the saving look
+        });
+    }, 600);
+    $('input.done-text').on('keyup change', function() {
+        var $input = $(this);
+
+        if ($input.data('lastVal') !== $input.val()) {
+            $input.data('lastVal', $input.val());
+            $input.addClass('saving'); // show it as saving
+            debouncedSave($input); 
+        }
+    }).val(OL.setup.data.doneMessage || '');
+
+    // when this widget changes back to view mode, do another save of everything
+    OL.on('save', function() {
+        OL.setup.replace({
+            'checklist': checklist,
+            'doneMessage': $('input.done-text').val()
+        });
+    });
 });

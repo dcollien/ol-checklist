@@ -18,8 +18,14 @@
             display: inline-block;
          }
 
+         .content {
+            text-align: left;
+         }
+
          .completed {
             color: #4caf50;
+            font-size: 20px;
+            line-height: 20px;
          }
 
          .saving {
@@ -29,17 +35,22 @@
          .item-text {
             padding-left: 1em;
          }
+
+         .progress {
+            display: inline-block;
+            width: 80%;
+         }
         </style>
     </head>
     <body>
         <div style="text-align: center;">
             <div class="content" id="content">       
             </div>
-
+            <div></div>
             <div class="progress">
                 <div class="progress-bar progress-bar-success" style="width: 0%"></div>
             </div>
-            <br>
+            <div></div>
             <div class="completed" style="display: none;"></div>
         </div>
 

@@ -7,6 +7,10 @@ itemClickHandler = function() {
     updates[$item.attr('id')] = isChecked;
     state[$item.attr('id')] = isChecked;
 
+    // tell OpenLearning that there was some kind of interaction
+    OL.user.logInteraction();
+
+    // update the user's saved state
     $item.addClass('saving');
     OL.user.update({'checked': updates}, 'set', function() {
         $item.removeClass('saving');
@@ -16,8 +20,18 @@ itemClickHandler = function() {
             numCompleted--;
         }
 
+        // submit an object of all item states e.g. 
+        /*
+            {
+                'item-id-1': true,
+                'item-id-2': false
+            }
+          to compare against the completion criteria
+          (to update the user's progress)
+        */
         OL.user.submit(state);
 
+        // update the UI
         update();
     });
 };
@@ -30,14 +44,15 @@ update = function() {
 
 OL(function() {
     var $content = $('#content');
-    var checklist = OL.setup.data.checklist || [{'id': 1, 'text': "I've completed this!"}];
+    var checklist = OL.setup.data.checklist || [{'id': '1', 'text': "I've completed this!"}];
     state = OL.user.data.checked || {};
 
-    $('.completed').text(OL.setup.data.completedText || 'All done!');
+    $('.completed').text(OL.setup.data.doneMessage || 'All done!');
     
     numCompleted = 0;
     numTotal = checklist.length;
 
+    // build the checklist
     $.each(checklist, function(i, item) {
         var $item = $('<div>', {'class': 'checkbox'})
             .append(

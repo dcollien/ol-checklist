@@ -21,11 +21,7 @@
          .completed {
             color: #4caf50;
          }
-
-         input.saving {
-            color: #444;
-         }
-
+         
          .checkbox-material.saving .check {
             color: #ddd !important;
          }
@@ -65,6 +61,16 @@
          .add-text {
             font-size: 12px;
          }
+
+         .done-text {
+            -webkit-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+         }
+
+         .done-text.saving {
+            color: #aaa;
+         }
+
         </style>
     </head>
     <body>
@@ -76,7 +82,7 @@
             <br>
             <hr>
             Text to display when all items are completed:<br>
-            <input type="text" class="done-text" placeholder="All Done!"></div>
+            <input type="text" class="done-text" placeholder="All Done!">
         </div>
 
         <script src="/openlearning.js"></script>
