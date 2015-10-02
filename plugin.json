@@ -1,6 +1,6 @@
 {
     "name": "Checklist",
-    "author": "David Collien",
+    "author": ["David Collien"],
     "email": "david@openlearning.com",
     "license": "MIT",
     "version": "0.0.1",
