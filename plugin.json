@@ -31,10 +31,7 @@
 
     "collaboration": false,
 
-    "sharing": false,
+    "sharing": false
 
-    "icon": {
-        "color": "red",
-        "image": "User Interface/Button"
-    }
+
 }
