@@ -5,7 +5,7 @@
     "license": "MIT",
     "version": "0.0.3",
     "description": "Check items off a list towards completion.",
-    "categories": "Self Assessment",
+    "categories": ["Self Assessment"],
 
 
     "setup": {
