@@ -29,7 +29,8 @@
         "comparison": "equal"
     },
 
-    "collaboration": false,
-
-    "sharing": false
+    "icon": {
+        "image": "User Interface/Double-Check",
+        "color": "#be5ab5"
+    }
 }

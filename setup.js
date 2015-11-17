@@ -3,35 +3,13 @@ var update, save, removeHandler, makeChangeHandler, addHandler;
 var newItem;
 var checklist;
 
-// create a universally unique id
-uuid = function() {
-    var _uuid = function(ph) {
-        if (ph) {
-            return (ph ^ Math.random() * 16 >> ph/4).toString(16);
-        } else {
-            return (
-                    [1e7] + // 10000000 +
-                    -1e3  + // -1000 +
-                    -4e3  + // -4000 +
-                    -8e3  + // -80000000 +
-                    -1e11   // -100000000000,
-                ).replace(
-                    /[018]/g, // zeroes, ones, and eights with
-                    _uuid     // random hex digits
-            );
-        }
-    };
-
-    return _uuid();
-};
-
 // build the checklist UI
 update = function() {
     $content.empty();
     $.each(checklist, function(i, item) {
-        var $input = $('<input>', {'type': 'text', 'class': 'item-text'}).val(item.text);
+        var $input = $('<input>', {'type': 'text', 'class': 'item-text-input'}).val(item.text);
         var $remove = $('<button>', {'class': 'btn btn-default btn-flat btn-remove'}).html('&times;');
-        var $item = $('<div>', {'class': 'checkbox'})
+        var $item = $('<div>', {'class': 'checkbox checkbox-primary'})
             .append(
                 $('<label>')
                     .append(
@@ -100,7 +78,7 @@ save = function(callback) {
         }
        for each item
     */
-    OL.setCriteria(_.zipObject(_.map(checklist, getCriteria)), function() {
+    OL.criteria.replace(_.zipObject(_.map(checklist, getCriteria)), function() {
         callbacksDone++;
         done();
     });
@@ -157,7 +135,7 @@ removeHandler = function() {
 
 // create a new item
 newItem = function() {
-    return {'id': uuid(), 'text': "I've completed this!"};
+    return {'id': ol.uuid(), 'text': "I've completed this!"};
 };
 
 // handler for adding new items to the list

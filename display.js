@@ -54,7 +54,7 @@ OL(function() {
 
     // build the checklist
     $.each(checklist, function(i, item) {
-        var $item = $('<div>', {'class': 'checkbox'})
+        var $item = $('<div>', {'class': 'checkbox checkbox-primary'})
             .append(
                 $('<label>')
                     .append(
@@ -68,7 +68,7 @@ OL(function() {
                             .append($('<span>', {'class': 'check'}))
                     )
                     .append(
-                        $('<span>', {'class': 'item-text'}).text(item.text)
+                        $('<div>', {'class': 'item-text'}).text(item.text)
                     )
             )
         ;

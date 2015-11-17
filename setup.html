@@ -4,9 +4,9 @@
         <title>Checklist Setup</title>
 
         <!-- Standard Styles -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap3/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/css/material.min.css">
+        <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/css/ripples.min.css">
         <link rel="stylesheet" type="text/css" href="/openlearning.css">
 
         <style>
@@ -19,7 +19,7 @@
          }
 
          .completed {
-            color: #4caf50;
+            color: #009688;
          }
 
          .checkbox-material.saving .check {
@@ -33,9 +33,10 @@
             box-shadow: none !important;
          }
 
-         .item-text {
+         .item-text-input {
             padding-left: 1em;
          }
+
          .done-text {
             padding-left: 0.5em;
          }
@@ -78,18 +79,20 @@
             <div class="content" id="content">
             </div>
             <br>
-            <button class="btn btn-success btn-flat btn-add">+ <span class="add-text">Add</span></button>
+            <button class="btn btn-primary btn-flat btn-add">+ <span class="add-text">Add</span></button>
             <br>
             <hr>
             Text to display when all items are completed:<br>
             <input type="text" class="done-text" placeholder="All Done!">
         </div>
 
-        <script src="/openlearning.js"></script>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-        <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+
+        <script src="/openlearning.js"></script>
+        <script src="/libs/bootstrap-material-design/js/material.min.js"></script>
+        <script src="/libs/bootstrap-material-design/js/ripples.min.js"></script>
         <script src="setup.js"></script>
     </body>
 </html>

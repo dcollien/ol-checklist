@@ -4,9 +4,9 @@
         <title>Checklist</title>
 
         <!-- Standard Styles -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
+        <link rel="stylesheet" href="/libs/bootstrap3/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/css/material.min.css">
+        <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/css/ripples.min.css">
         <link rel="stylesheet" type="text/css" href="/openlearning.css">
 
         <style>
@@ -23,7 +23,7 @@
          }
 
          .completed {
-            color: #4caf50;
+            color: #009688;
             font-size: 20px;
             line-height: 20px;
          }
@@ -33,7 +33,8 @@
          }
 
          .item-text {
-            padding-left: 1em;
+            display: inline;
+            margin-left: 1em;
          }
 
          .progress {
@@ -54,11 +55,11 @@
             <div class="completed" style="display: none;"></div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
         <script src="/openlearning.js"></script>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-        <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+        <script src="/libs/bootstrap-material-design/js/material.min.js"></script>
+        <script src="/libs/bootstrap-material-design/js/ripples.min.js"></script>
         <script src="display.js"></script>
     </body>
 </html>
