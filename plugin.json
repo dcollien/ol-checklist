@@ -3,7 +3,7 @@
     "author": ["David Collien"],
     "email": "david@openlearning.com",
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Check items off a list towards completion.",
     "category": "Self Assessment",
 
@@ -31,7 +31,11 @@
 
     "collaboration": false,
 
-    "sharing": false
-
+    "sharing": false,
+    
+    "icon": {
+        "color": "#0000f6",
+        "image": "User Interface/Button"
+    }
 
 }
