@@ -135,7 +135,7 @@ removeHandler = function() {
 
 // create a new item
 newItem = function() {
-    return {'id': ol.uuid(), 'text': "I've completed this!"};
+    return {'id': OL.uuid(), 'text': "I've completed this!"};
 };
 
 // handler for adding new items to the list
